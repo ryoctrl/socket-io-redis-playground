@@ -1,0 +1,12 @@
+{
+  "name": "socket-io-cluster-engine",
+  "version": "1.0.0",
+  "description": "Socket.IO v4 with cluster-engine and Redis adapter",
+  "main": "index.js",
+  "dependencies": {
+    "@socket.io/cluster-engine": "^0.1.0",
+    "@socket.io/redis-adapter": "^8.3.0",
+    "redis": "^4.6.7",
+    "socket.io": "^4.6.1"
+  }
+}

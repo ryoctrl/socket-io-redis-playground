@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   redis:
     image: redis:6-alpine
@@ -71,8 +71,38 @@ services:
       - socket_network
     depends_on:
       - redis
+  socket1-cluster-engine:
+    build:
+      context: ./server-cluster-engine
+      dockerfile: Dockerfile
+    container_name: socket1-cluster-engine
+    environment:
+      - PORT=5001
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "5001:5001"
+    networks:
+      - socket_network
+    depends_on:
+      - redis
+
+  socket2-cluster-engine:
+    build:
+      context: ./server-cluster-engine
+      dockerfile: Dockerfile
+    container_name: socket2-cluster-engine
+    environment:
+      - PORT=5002
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "5002:5002"
+    networks:
+      - socket_network
+    depends_on:
+      - redis
 
 networks:
   socket_network:
     driver: bridge
-
