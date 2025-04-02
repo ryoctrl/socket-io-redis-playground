@@ -1,0 +1,78 @@
+version: '3'
+services:
+  redis:
+    image: redis:6-alpine
+    container_name: redis-server
+    ports:
+      - "6379:6379"
+    networks:
+      - socket_network
+
+  socket1:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: socket1
+    environment:
+      - PORT=3001
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "3001:3001"
+    networks:
+      - socket_network
+    depends_on:
+      - redis
+
+  socket2:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: socket2
+    environment:
+      - PORT=3002
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "3002:3002"
+    networks:
+      - socket_network
+    depends_on:
+      - redis
+
+  socket1-v4:
+    build:
+      context: ./server-v4
+      dockerfile: Dockerfile
+    container_name: socket1-v4
+    environment:
+      - PORT=4001
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "4001:4001"
+    networks:
+      - socket_network
+    depends_on:
+      - redis
+
+  socket2-v4:
+    build:
+      context: ./server-v4
+      dockerfile: Dockerfile
+    container_name: socket2-v4
+    environment:
+      - PORT=4002
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "4002:4002"
+    networks:
+      - socket_network
+    depends_on:
+      - redis
+
+networks:
+  socket_network:
+    driver: bridge
+

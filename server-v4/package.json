@@ -1,0 +1,12 @@
+{
+  "name": "socket-io-redis-v4",
+  "version": "1.0.0",
+  "description": "Socket.IO v4 with Redis adapter",
+  "main": "index.js",
+  "dependencies": {
+    "socket.io": "^4.6.1",
+    "@socket.io/redis-adapter": "^8.3.0",
+    "redis": "^4.6.7"
+  }
+}
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.IO Redis Test</title>
+    <script src="https://cdn.socket.io/2.0.3/socket.io.js"></script>
+</head>
+<body>
+    <h2>Socket.IO Redis Test</h2>
+    <input id="message" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+    <div id="logs"></div>
+
+    <script>
+        const socket1 = io("http://localhost:3001");
+        const socket2 = io("http://localhost:3002");
+
+        socket1.on("message", (msg) => {
+            const log = document.createElement("div");
+            log.textContent = `[3001] ${msg}`;
+            document.getElementById("logs").appendChild(log);
+        });
+
+        socket2.on("message", (msg) => {
+            const log = document.createElement("div");
+            log.textContent = `[3002] ${msg}`;
+            document.getElementById("logs").appendChild(log);
+        });
+
+        function sendMessage() {
+            const msg = document.getElementById("message").value;
+            socket1.emit("message", msg);
+            socket2.emit("message", msg);
+        }
+    </script>
+</body>
+</html>
+

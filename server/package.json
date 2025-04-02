@@ -1,0 +1,12 @@
+{
+  "name": "socket-io-redis-v2",
+  "version": "1.0.0",
+  "description": "Socket.IO v2 with Redis adapter and session management",
+  "main": "index.js",
+  "dependencies": {
+    "socket.io": "^2.0.3",
+    "socket.io-redis": "^5.2.0",
+    "redis": "^3.1.2",
+    "uuid": "^3.4.0"
+  }
+}
